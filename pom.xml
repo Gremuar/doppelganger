@@ -78,7 +78,7 @@
                         <configuration>
                             <target>
                                 <move file="${project.build.directory}/${project.build.finalName}.jar"
-                                      todir="${project.basedir}/bild"/>
+                                      todir="${project.basedir}/build"/>
                             </target>
                         </configuration>
                         <goals>
