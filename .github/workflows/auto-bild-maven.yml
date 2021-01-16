@@ -23,3 +23,8 @@ jobs:
           java-version: 1.11
       - name: Maven Package
         run: mvn -B clean compile package -DskipTests
+      - uses: release-drafter/release-drafter@v5
+        with:
+          publish: true
+        env:
+          GITHUB_TOKEN: ${{ github.TOKEN }}
