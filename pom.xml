@@ -92,9 +92,9 @@
 
     <distributionManagement>
         <repository>
-            <id>github</id>
+            <id>doppelganger</id>
             <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/doppelganger/build</url>
+            <url>https://maven.pkg.github.com/Gremuar/doppelganger</url>
         </repository>
     </distributionManagement>
 </project>
