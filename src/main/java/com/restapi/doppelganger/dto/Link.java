@@ -1,8 +1,6 @@
 package com.restapi.doppelganger.dto;
 
-import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.ProtocolException;
 import java.net.URL;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

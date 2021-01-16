@@ -26,7 +26,6 @@ public class UserLink {
   private Long id;
   @Column(unique = true)
   @JsonIgnore
-  //doppelganger id
   private Long dgId;
   @Transient
   private Long reqId;

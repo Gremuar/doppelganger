@@ -10,14 +10,10 @@ import com.restapi.doppelganger.worker.DbCleaner;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import javax.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.beans.factory.config.BeanPostProcessor;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,26 +30,26 @@ public class RequestController {
   private UserLinkRepository userLinkRepository;
   @Autowired
   private FreeShortUrlRepository freeShortUrlRepository;
-  @Autowired
-  DbCleaner dbCleaner;
+//  @Autowired
+//  private DbCleaner dbCleaner;
   @Value("${reqTimeout}")
-  Integer reqTimeout;
-  private final AtomicLong reqIdCounter = new AtomicLong(1000L);
-  private final AtomicLong lnkIdCounter;
+  private Integer reqTimeout;
+  private final AtomicLong reqIdCounter = new AtomicLong();
+  private AtomicLong lnkIdCounter;
 
-  public RequestController(UserLinkRepository userLinkRepository) {
-    this.lnkIdCounter =
-        new AtomicLong(
-            Optional.ofNullable(
-                userLinkRepository.getMaxId()
-            ).orElse(0L)
-        );
+
+  @PostConstruct
+  public void init(){
+    lnkIdCounter = new AtomicLong(
+        Optional.ofNullable(
+            userLinkRepository.getMaxId()
+        ).orElse(0L)
+    );
   }
 
   @GetMapping("/{shortUrl}")
   public Object goToFullUrl(RedirectAttributes attributes, @PathVariable String shortUrl) {
     Long reqId = reqIdCounter.incrementAndGet();
-//    attributes.addFlashAttribute("flashAttribute", "goToFullUrl");
     attributes.addAttribute("redirectedFrom", "Doppelganger.ru");
     var linkInDb = userLinkRepository.findFirstByShortLink(shortUrl);
     if (linkInDb == null) {

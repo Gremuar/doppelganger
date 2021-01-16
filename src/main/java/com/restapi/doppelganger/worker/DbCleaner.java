@@ -1,12 +1,10 @@
 package com.restapi.doppelganger.worker;
 
 import com.restapi.doppelganger.entity.FreeShortUrl;
-import com.restapi.doppelganger.entity.UserLink;
 import com.restapi.doppelganger.repository.FreeShortUrlRepository;
 import com.restapi.doppelganger.repository.UserLinkRepository;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.Optional;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +42,8 @@ public class DbCleaner {
                 try {
                   freeShortUrlRepository.save(new FreeShortUrl(userLink.getShortLink()));
                 } catch (DataIntegrityViolationException ex) {
-                  log.info("Не удалось добавить в таблицу свободный id="+userLink.getShortLink()+"\n"+ex.getMessage());
+                  log.info("Не удалось добавить в таблицу свободный id=" + userLink.getShortLink() +
+                      "\n" + ex.getMessage());
                 }
                 userLinkRepository.delete(userLink);
                 log.info("Deleted " + userLink);
@@ -57,8 +56,10 @@ public class DbCleaner {
         }
       });
     }
-    t.start();
-    log.info("DbCleaner started");
+    if (t.getState().toString().equals("TERMINATED") || t.getState().toString().equals("NEW")) {
+      t.start();
+      log.info("DbCleaner started");
+    }
   }
 
   public Thread.State state() {
