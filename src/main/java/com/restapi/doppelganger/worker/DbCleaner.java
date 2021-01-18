@@ -41,6 +41,8 @@ public class DbCleaner {
               .forEachOrdered(userLink -> {
                 try {
                   freeShortUrlRepository.save(new FreeShortUrl(userLink.getShortLink()));
+                  log.info(
+                      "Добавлен свободный id в таблицу FreeShortUrl: " + userLink.getShortLink());
                 } catch (DataIntegrityViolationException ex) {
                   log.info("Не удалось добавить в таблицу свободный id=" + userLink.getShortLink() +
                       "\n" + ex.getMessage());

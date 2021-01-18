@@ -6,14 +6,19 @@ import com.restapi.doppelganger.entity.FreeShortUrl;
 import com.restapi.doppelganger.entity.UserLink;
 import com.restapi.doppelganger.repository.FreeShortUrlRepository;
 import com.restapi.doppelganger.repository.UserLinkRepository;
-import com.restapi.doppelganger.worker.DbCleaner;
+import com.restapi.doppelganger.util.Base62;
+import java.sql.SQLDataException;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 import javax.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.JDBCException;
+import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,7 +35,7 @@ public class RequestController {
   private UserLinkRepository userLinkRepository;
   @Autowired
   private FreeShortUrlRepository freeShortUrlRepository;
-//  @Autowired
+  //  @Autowired
 //  private DbCleaner dbCleaner;
   @Value("${reqTimeout}")
   private Integer reqTimeout;
@@ -39,7 +44,7 @@ public class RequestController {
 
 
   @PostConstruct
-  public void init(){
+  public void init() {
     lnkIdCounter = new AtomicLong(
         Optional.ofNullable(
             userLinkRepository.getMaxId()
@@ -87,14 +92,19 @@ public class RequestController {
     if (freeShortUrl != null) {
       shortLink = freeShortUrl.getShortUrl();
       freeShortUrlRepository.delete(freeShortUrl);
+      log.info("Из таблицы FreeShortUrl удален id: " + freeShortUrl.getShortUrl());
     } else {
-      shortLink = UserLink.getHash(String.valueOf(lnkIdCounter.incrementAndGet()));
+      shortLink = Base62.getHash(String.valueOf(lnkIdCounter.incrementAndGet()));
     }
-    UserLink userLink = new UserLink(reqId, UserLink.getUnHash(shortLink), url.getUrl(), shortLink, LocalDateTime.now());
+    UserLink userLink = new UserLink(reqId, Base62.getUnHash(shortLink), url.getUrl(), shortLink,
+        LocalDateTime.now());
     try {
       userLinkRepository.save(userLink);
-    } catch (Exception ex) {
+      log.info("Добавлен в таблицу UserLink: " + userLink);
+    } catch (DataAccessException ex) {
       log.error("Не удалось сохранить объект в базу данных!\nЗапрос: POST /\nОбъект: " + userLink);
+      freeShortUrlRepository.save(new FreeShortUrl(shortLink));
+      log.info("Сохранили неиспользуемый shortLink(" + shortLink + ") в таблицу FreeShortUrl");
       return ResponseEntity
           .status(500)
           .body(

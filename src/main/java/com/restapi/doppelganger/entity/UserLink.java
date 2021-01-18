@@ -1,7 +1,6 @@
 package com.restapi.doppelganger.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.seruco.encoding.base62.Base62;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,8 +35,6 @@ public class UserLink {
   @Column(unique = true, nullable = false)
   private LocalDateTime addTime;
 
-  private static final Base62 base62 = Base62.createInstance();
-
   public UserLink(Long reqId, Long dgId, String longLink, String shortLink,
                   LocalDateTime addTime) {
     this.reqId = reqId;
@@ -45,15 +42,5 @@ public class UserLink {
     this.longLink = longLink;
     this.shortLink = shortLink;
     this.addTime = addTime;
-  }
-
-  public static String getHash(String str) {
-    final byte[] encoded = base62.encode(str.getBytes());
-    return new String(encoded);
-  }
-
-  public static Long getUnHash(String str) {
-    final byte[] encoded = base62.decode(str.getBytes());
-    return Long.valueOf(new String(encoded));
   }
 }

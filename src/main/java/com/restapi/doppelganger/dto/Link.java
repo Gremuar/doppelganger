@@ -1,7 +1,11 @@
 package com.restapi.doppelganger.dto;
 
+import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.Locale;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,9 +22,12 @@ public class Link {
 
   public boolean isValid() {
     try {
+      if (!url.matches("^.*://.*$")) {
+        throw new URISyntaxException(url, "Переданный адрес не является URL");
+      }
       new URL(url).toURI();
       return true;
-    } catch (Exception e) {
+    } catch (MalformedURLException | URISyntaxException e) {
       return false;
     }
   }
@@ -35,7 +42,8 @@ public class Link {
       connection.setRequestMethod("HEAD");
       int responseCode = connection.getResponseCode();
       return (200 <= responseCode && responseCode <= 399 || responseCode == 418);
-    } catch (Exception exception) {
+    } catch (IOException ex) {
+      System.out.println("IOException");
       return false;
     }
   }
