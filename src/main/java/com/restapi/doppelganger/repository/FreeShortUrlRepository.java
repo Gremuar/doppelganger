@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface FreeShortUrlRepository extends JpaRepository<FreeShortUrl, Long> {
   FreeShortUrl findFirstBy();
+  long count();
 }

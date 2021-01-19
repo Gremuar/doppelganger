@@ -7,15 +7,11 @@ import com.restapi.doppelganger.entity.UserLink;
 import com.restapi.doppelganger.repository.FreeShortUrlRepository;
 import com.restapi.doppelganger.repository.UserLinkRepository;
 import com.restapi.doppelganger.util.Base62;
-import java.sql.SQLDataException;
-import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 import javax.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.JDBCException;
-import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
@@ -35,8 +31,6 @@ public class RequestController {
   private UserLinkRepository userLinkRepository;
   @Autowired
   private FreeShortUrlRepository freeShortUrlRepository;
-  //  @Autowired
-//  private DbCleaner dbCleaner;
   @Value("${reqTimeout}")
   private Integer reqTimeout;
   private final AtomicLong reqIdCounter = new AtomicLong();
@@ -46,9 +40,9 @@ public class RequestController {
   @PostConstruct
   public void init() {
     lnkIdCounter = new AtomicLong(
-        Optional.ofNullable(
-            userLinkRepository.getMaxId()
-        ).orElse(0L)
+        Optional.ofNullable(userLinkRepository.count()).orElse(0L)
+            +
+            Optional.ofNullable(freeShortUrlRepository.count()).orElse(0L)
     );
   }
 

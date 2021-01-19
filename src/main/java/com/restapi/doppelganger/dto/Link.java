@@ -5,18 +5,19 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.Locale;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.extern.slf4j.Slf4j;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @ToString
+@Slf4j
 public class Link {
   private String url;
 
@@ -43,7 +44,7 @@ public class Link {
       int responseCode = connection.getResponseCode();
       return (200 <= responseCode && responseCode <= 399 || responseCode == 418);
     } catch (IOException ex) {
-      System.out.println("IOException");
+      log.debug(ex.getMessage());
       return false;
     }
   }

@@ -1,7 +1,6 @@
 package com.restapi.doppelganger.repository;
 
 import java.util.List;
-import org.apache.catalina.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -16,4 +15,5 @@ public interface UserLinkRepository extends JpaRepository<UserLink, Long> {
   UserLink findFirstBy();
   @Query("SELECT max(dgId) FROM UserLink ")
   Long getMaxId();
+  long count();
 }
