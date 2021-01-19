@@ -40,9 +40,7 @@ public class RequestController {
   @PostConstruct
   public void init() {
     lnkIdCounter = new AtomicLong(
-        Optional.ofNullable(userLinkRepository.count()).orElse(0L)
-            +
-            Optional.ofNullable(freeShortUrlRepository.count()).orElse(0L)
+        userLinkRepository.count() + freeShortUrlRepository.count()
     );
   }
 
