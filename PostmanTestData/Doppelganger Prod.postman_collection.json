@@ -1,0 +1,389 @@
+{
+	"info": {
+		"_postman_id": "8aeac4e8-4865-4821-afa8-a74a4d4f1e4c",
+		"name": "Doppelganger Prod",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Case 1",
+			"protocolProfileBehavior": {
+				"followAuthorizationHeader": true,
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"url\": \"http://yandex.ru\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}:{{port}}/",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						""
+					],
+					"query": [
+						{
+							"key": "url",
+							"value": "http://google.com",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "vasya",
+							"disabled": true
+						}
+					]
+				},
+				"description": "normal case"
+			},
+			"response": []
+		},
+		{
+			"name": "Case 2",
+			"protocolProfileBehavior": {
+				"followAuthorizationHeader": true,
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"url\": \"http://google.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}:{{port}}/",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						""
+					],
+					"query": [
+						{
+							"key": "url",
+							"value": "http://google.com",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "vasya",
+							"disabled": true
+						}
+					]
+				},
+				"description": "normal case"
+			},
+			"response": []
+		},
+		{
+			"name": "Case 3",
+			"protocolProfileBehavior": {
+				"followAuthorizationHeader": true,
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"url\": \"http:/mail.ru\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}:{{port}}/",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						""
+					],
+					"query": [
+						{
+							"key": "url",
+							"value": "http://google.com",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "vasya",
+							"disabled": true
+						}
+					]
+				},
+				"description": "normal case"
+			},
+			"response": []
+		},
+		{
+			"name": "Case 4",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {},
+				"followAuthorizationHeader": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"url\": \"mail.ru\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}:{{port}}/",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						""
+					],
+					"query": [
+						{
+							"key": "url",
+							"value": "http://google.com",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "vasya",
+							"disabled": true
+						}
+					]
+				},
+				"description": "normal case"
+			},
+			"response": []
+		},
+		{
+			"name": "Case 5 from ListValues",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {},
+				"followAuthorizationHeader": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"url\": \"{{url}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}:{{port}}/",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						""
+					],
+					"query": [
+						{
+							"key": "url",
+							"value": "http://google.com",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "vasya",
+							"disabled": true
+						}
+					]
+				},
+				"description": "normal case"
+			},
+			"response": []
+		},
+		{
+			"name": "Overflow length db field #ErrorCase 1",
+			"protocolProfileBehavior": {
+				"followAuthorizationHeader": true,
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"url\": \"http://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.comhttp://google.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}:{{port}}/",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						""
+					],
+					"query": [
+						{
+							"key": "url",
+							"value": "http://google.com",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "vasya",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Case 1",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {},
+				"followAuthorizationHeader": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}:{{port}}/n",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"n"
+					],
+					"query": [
+						{
+							"key": "url",
+							"value": "http://google.com",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "vasya",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Case 2 from ListValues Copy",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {},
+				"followAuthorizationHeader": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}:{{port}}/{{url}}",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"{{url}}"
+					],
+					"query": [
+						{
+							"key": "password",
+							"value": "vasya",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "port",
+			"value": "80"
+		},
+		{
+			"key": "host",
+			"value": "localhost"
+		}
+	]
+}

@@ -107,7 +107,7 @@
 
     <distributionManagement>
         <repository>
-            <id>Xenon_x</id>
+            <id>Gremuar</id>
             <name>GitHub Packages</name>
             <url>https://maven.pkg.github.com/Gremuar/doppelganger</url>
         </repository>
