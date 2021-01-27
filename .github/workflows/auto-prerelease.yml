@@ -28,6 +28,6 @@ jobs:
           prerelease: true
           title: "Development Build"
           files: |
-#            LICENSE.txt
-            target/*.jar
-            *.jar
+            LICENSE.txt
+            build/*.jar
+            build/*.bat
