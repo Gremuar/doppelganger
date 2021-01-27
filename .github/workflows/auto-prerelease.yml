@@ -12,8 +12,13 @@ jobs:
 
     steps:
       # ...
+      - uses: actions/checkout@v1
+      - name: set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.11
       - name: "Build & test"
-        run: |
+        run: mvn -B clean compile package -DskipTests|
           echo "done!"
 
       - uses: "marvinpinto/action-automatic-releases@latest"
