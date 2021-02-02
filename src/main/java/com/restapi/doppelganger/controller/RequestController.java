@@ -8,7 +8,6 @@ import com.restapi.doppelganger.repository.FreeShortUrlRepository;
 import com.restapi.doppelganger.repository.UserLinkRepository;
 import com.restapi.doppelganger.util.Base62;
 import java.time.LocalDateTime;
-import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 import javax.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;

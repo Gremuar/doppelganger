@@ -1,7 +1,6 @@
 package com.restapi.doppelganger.util;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class AsJsonString {

@@ -32,7 +32,7 @@ public class UserLink {
   private String longLink;
   @Column(unique = true, nullable = false)
   private String shortLink;
-  @Column(unique = true, nullable = false)
+  @Column(nullable = false)
   private LocalDateTime addTime;
 
   public UserLink(Long reqId, Long dgId, String longLink, String shortLink,
